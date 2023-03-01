@@ -1,7 +1,9 @@
+import React from "react";
 import { StatusBar } from 'expo-status-bar';
-import {Button, FlatList, StyleSheet, Text, View} from 'react-native';
+import {Button, FlatList, StyleSheet, View} from 'react-native';
 import {useState} from "react";
 import Header from "./components/Header/Header";
+import TodoItem from "./components/TodoItem/TodoItem";
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -10,6 +12,12 @@ export default function App() {
     { text: "play on the ARK", key: "3" },
   ])
 
+  const handleClick = (key) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter(todo => todo.key !== key)
+    })
+  }
+
   return (
     <View style={styles.container}>
       {/*header*/}
@@ -17,12 +25,13 @@ export default function App() {
       <View style={styles.content}>
         {/*form*/}
         <View style={styles.list}>
-          <FlatList
-            data={todos}
-            renderItem={({ item }) => (
-              <Text>{item.text}</Text>
-            )}
-          />
+          <FlatList data={todos} renderItem={
+            ({ item }) => {
+              return (
+                <TodoItem item={item} handleClick={handleClick} />
+              )
+            }
+          } />
         </View>
       </View>
       <StatusBar style="auto" />
