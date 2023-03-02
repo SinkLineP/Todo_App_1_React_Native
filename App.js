@@ -45,32 +45,32 @@ export default function App() {
 
 
   return (
-    <>
-      <Sandbox />
+    // <>
+    //   <Sandbox />
+
+    // </>
+
+    <TouchableWithoutFeedback onPress={() => {
+      Keyboard.dismiss();
+      // console.log("dis keyboard")
+    }}>
+      <View style={styles.container}>
+        <Header />
+        <View style={styles.content}>
+          <CreatedTodo submitHandler={pushTodoToData} />
+          <View style={styles.list}>
+            <FlatList data={todos} renderItem={
+              ({ item }) => {
+                return (
+                  <TodoItem item={item} handleClick={handleClick}/>
+                )
+              }
+            } />
+          </View>
+        </View>
       <StatusBar style="auto" />
-    </>
-
-    // <TouchableWithoutFeedback onPress={() => {
-    //   Keyboard.dismiss();
-    //   // console.log("dis keyboard")
-    // }}>
-    //   <View style={styles.container}>
-    //     <Header />
-    //     <View style={styles.content}>
-    //       <CreatedTodo submitHandler={pushTodoToData} />
-    //       <View style={styles.list}>
-    //         <FlatList data={todos} renderItem={
-    //           ({ item }) => {
-    //             return (
-    //               <TodoItem item={item} handleClick={handleClick}/>
-    //             )
-    //           }
-    //         } />
-    //       </View>
-    //     </View>
-
-    //   </View>
-    // </TouchableWithoutFeedback>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -80,9 +80,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   content: {
-    padding: 40
+    flex: 1,
+    padding: 40,
   },
   list: {
-    marginTop: 20
+    flex: 1,
+    marginTop: 20,
   }
 });

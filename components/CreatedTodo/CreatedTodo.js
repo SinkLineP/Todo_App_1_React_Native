@@ -14,11 +14,11 @@ export default function CreatedTodo({ submitHandler, isShowBtn }) {
       <TextInput
         value={text}
         style={styles.input}
-        placeholder={"new todo..."}
+        placeholder={"Новая задача..."}
         onChangeText={changeHandler}
       />
       <Button
-        title={"add todo"}
+        title={"добавить задачу"}
         onPress={() => {
             submitHandler(text)
             setText("")
