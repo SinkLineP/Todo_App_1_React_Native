@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar } from 'expo-status-bar';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {Alert, FlatList, Keyboard, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import {useState} from "react";
 import Header from "./components/Header/Header";
 import TodoItem from "./components/TodoItem/TodoItem";
@@ -20,34 +20,51 @@ export default function App() {
   }
 
   const pushTodoToData = (value) => {
-    setTodos((prevTodos) => {
-      return [
-        {text: value, key: Math.random().toString()},
-        ...prevTodos
-      ]
-    })
+    if (value.length > 3) {
+      setTodos((prevTodos) => {
+        return [
+          {text: value, key: Math.random().toString()},
+          ...prevTodos
+        ]
+      })
+    } else if (value.length === 0) {
+      Alert.alert("Упс!", "Это поле не должно быть пустым.", [
+        {text: "Понятно", onPress: () => console.log("Сообщение будет закрыто.")}
+      ])
+    } else if (value.length <= 3 && value.length !== 0) {
+      Alert.alert("Упс!", "Длина должна быть больше 3-х символов.", [
+        {text: "Понятно", onPress: () => console.log("Сообщение будет закрыто.")}
+      ])
+    }
+
+
   }
 
 
 
 
   return (
-    <View style={styles.container}>
-      <Header />
-      <View style={styles.content}>
-        <CreatedTodo submitHandler={pushTodoToData} />
-        <View style={styles.list}>
-          <FlatList data={todos} renderItem={
-            ({ item }) => {
-              return (
-                <TodoItem item={item} handleClick={handleClick}/>
-              )
-            }
-          } />
+    <TouchableWithoutFeedback onPress={() => {
+      Keyboard.dismiss();
+      // console.log("dis keyboard")
+    }}>
+      <View style={styles.container}>
+        <Header />
+        <View style={styles.content}>
+          <CreatedTodo submitHandler={pushTodoToData} />
+          <View style={styles.list}>
+            <FlatList data={todos} renderItem={
+              ({ item }) => {
+                return (
+                  <TodoItem item={item} handleClick={handleClick}/>
+                )
+              }
+            } />
+          </View>
         </View>
+        <StatusBar style="auto" />
       </View>
-      <StatusBar style="auto" />
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 

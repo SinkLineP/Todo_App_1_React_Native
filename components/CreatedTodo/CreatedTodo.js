@@ -1,27 +1,16 @@
 import React, {useState} from "react";
 import {Button, StyleSheet, TextInput, View, Text} from "react-native";
 
-export default function CreatedTodo({ submitHandler }) {
+export default function CreatedTodo({ submitHandler, isShowBtn }) {
   const [text, setText] = useState("");
-  const [isStatus, setStatus] = useState(false);
 
   const changeHandler = (content) => {
-    if (content !== "") {
-      setStatus(true)
-      setText(content)
-    } else {
-      setStatus(false)
-    }
-  }
-
-  const showMessageError = (errorMessage) => {
-    return errorMessage;
+    setText(content)
   }
 
 
   return (
     <View>
-      <Text style={styles.errorMessage}>{!isStatus ? showMessageError("Вы не заполнили название задачи.") : ""}</Text>
       <TextInput
         value={text}
         style={styles.input}
@@ -31,13 +20,10 @@ export default function CreatedTodo({ submitHandler }) {
       <Button
         title={"add todo"}
         onPress={() => {
-          if (isStatus !== false) {
             submitHandler(text)
             setText("")
-            setStatus(false)
-          }
         }}
-        color={!isStatus ? "#febaa4" : "coral"} />
+        color={"coral"} />
     </View>
   )
 }
