@@ -1,9 +1,10 @@
 import React from "react";
 import { StatusBar } from 'expo-status-bar';
-import {Button, FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {useState} from "react";
 import Header from "./components/Header/Header";
 import TodoItem from "./components/TodoItem/TodoItem";
+import CreatedTodo from "./components/CreatedTodo/CreatedTodo";
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -18,17 +19,28 @@ export default function App() {
     })
   }
 
+  const pushTodoToData = (value) => {
+    setTodos((prevTodos) => {
+      return [
+        {text: value, key: Math.random().toString()},
+        ...prevTodos
+      ]
+    })
+  }
+
+
+
+
   return (
     <View style={styles.container}>
-      {/*header*/}
       <Header />
       <View style={styles.content}>
-        {/*form*/}
+        <CreatedTodo submitHandler={pushTodoToData} />
         <View style={styles.list}>
           <FlatList data={todos} renderItem={
             ({ item }) => {
               return (
-                <TodoItem item={item} handleClick={handleClick} />
+                <TodoItem item={item} handleClick={handleClick}/>
               )
             }
           } />

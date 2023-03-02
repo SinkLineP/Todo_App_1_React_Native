@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "TodoAppOne",
-    "slug": "TodoAppOne",
+    "name": "TodoAppOne_post1",
+    "slug": "TodoAppOne_post1",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,16 +15,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "."
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.sinkline_p.TodoAppOne_post1"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e61eafbe-6c21-4795-b0e4-15a0ed29f49f"
+      }
     }
   }
 }
