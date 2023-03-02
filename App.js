@@ -5,6 +5,7 @@ import {useState} from "react";
 import Header from "./components/Header/Header";
 import TodoItem from "./components/TodoItem/TodoItem";
 import CreatedTodo from "./components/CreatedTodo/CreatedTodo";
+import Sandbox from "./components/Sandbox/Sandbox";
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -44,27 +45,32 @@ export default function App() {
 
 
   return (
-    <TouchableWithoutFeedback onPress={() => {
-      Keyboard.dismiss();
-      // console.log("dis keyboard")
-    }}>
-      <View style={styles.container}>
-        <Header />
-        <View style={styles.content}>
-          <CreatedTodo submitHandler={pushTodoToData} />
-          <View style={styles.list}>
-            <FlatList data={todos} renderItem={
-              ({ item }) => {
-                return (
-                  <TodoItem item={item} handleClick={handleClick}/>
-                )
-              }
-            } />
-          </View>
-        </View>
-        <StatusBar style="auto" />
-      </View>
-    </TouchableWithoutFeedback>
+    <>
+      <Sandbox />
+      <StatusBar style="auto" />
+    </>
+
+    // <TouchableWithoutFeedback onPress={() => {
+    //   Keyboard.dismiss();
+    //   // console.log("dis keyboard")
+    // }}>
+    //   <View style={styles.container}>
+    //     <Header />
+    //     <View style={styles.content}>
+    //       <CreatedTodo submitHandler={pushTodoToData} />
+    //       <View style={styles.list}>
+    //         <FlatList data={todos} renderItem={
+    //           ({ item }) => {
+    //             return (
+    //               <TodoItem item={item} handleClick={handleClick}/>
+    //             )
+    //           }
+    //         } />
+    //       </View>
+    //     </View>
+
+    //   </View>
+    // </TouchableWithoutFeedback>
   );
 }
 
