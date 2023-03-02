@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar } from 'expo-status-bar';
-import {Alert, FlatList, Keyboard, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
+import {Alert, FlatList, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import {useState} from "react";
 import Header from "./components/Header/Header";
 import TodoItem from "./components/TodoItem/TodoItem";
@@ -59,13 +59,18 @@ export default function App() {
         <View style={styles.content}>
           <CreatedTodo submitHandler={pushTodoToData} />
           <View style={styles.list}>
-            <FlatList data={todos} renderItem={
-              ({ item }) => {
-                return (
-                  <TodoItem item={item} handleClick={handleClick}/>
-                )
-              }
-            } />
+            {todos.length > 0 ? (
+              <FlatList data={todos} renderItem={
+                ({ item }) => {
+                  return (
+                    <TodoItem item={item} handleClick={handleClick}/>
+                  )
+                }
+              } />
+            ) : (
+              <Text style={styles.colorEmptyContent}>Задач нет, используйте поле выше для их создания.</Text>
+            )}
+
           </View>
         </View>
       <StatusBar style="auto" />
@@ -86,5 +91,8 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     marginTop: 20,
+  },
+  colorEmptyContent: {
+    color: "#747474"
   }
 });
